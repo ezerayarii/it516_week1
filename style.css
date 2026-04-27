@@ -1,0 +1,106 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: linear-gradient(135deg, #2c2c2c, #1a1a1a);
+    color: #a855f7;
+    text-align: center;
+    padding: 30px 20px;
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+section {
+    margin: 20px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #1a1a1a;
+    color: #ccc;
+    margin-top: 30px;
+}
+h1, h2 {
+    color: #6a0dad; /* purple vibe */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+    margin: 10px 0;
+    padding: 12px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+li:hover {
+    transform: scale(1.03);
+    background: #dcdcdc;
+}
+img {
+    display: block;
+    margin: 30px auto;
+    width: 150px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    transition: 0.3s;
+}
+
+section:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+button {
+    background: #a855f7;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:hover {
+    background: #9333ea;
+}
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav li {
+        border-top: 1px solid #444;
+    }
+
+}nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 10;
+    background: #222;
+}
+
+nav li {
+    padding: 30px 40px;
+    color: white;
+    cursor: pointer;
+}
+
+nav li:hover {
+    background: #444;
+}
