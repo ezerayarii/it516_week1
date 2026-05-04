@@ -104,3 +104,17 @@ nav li {
 nav li:hover {
     background: #444;
 }
+.dark {
+    background-color: #121212;
+    color: white;
+}
+
+.dark section {
+    background-color: #222;
+}
+
+.dark header,
+.dark footer,
+.dark nav {
+    background-color: #000;
+}
