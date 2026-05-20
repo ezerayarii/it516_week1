@@ -1,113 +1,83 @@
-"use client";
+import Header from "@/components/Header";
+import Nav from "@/components/Nav";
+import Footer from "@/components/Footer";
+import ContactForm from "@/components/ContactForm";
+import ThemeToggle from "@/components/ThemeToggle";
+import SkillCard from "@/components/SkillCard";
 
-import { useState, useEffect } from "react";
-import Header from "../components/Header";
-import Nav from "../components/Nav";
-import Footer from "../components/Footer";
-import Card from "../components/Card";
-import "./globals.css";
+const skills = [
+  {
+    title: "HTML",
+    description: "Semantic structure for accessible web pages.",
+  },
+  {
+    title: "CSS",
+    description: "Responsive styling, spacing, layout, and visual design.",
+  },
+  {
+    title: "JavaScript",
+    description: "Interactive behavior such as validation and events.",
+  },
+  {
+    title: "React",
+    description: "Component-based architecture with reusable UI sections.",
+  },
+];
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-
-  // Save dark mode preference
-  useEffect(() => {
-    const savedMode = localStorage.getItem("darkMode");
-
-    if (savedMode === "true") {
-      setDarkMode(true);
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("darkMode", darkMode.toString());
-  }, [darkMode]);
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-
-    if (name === "" || email === "") {
-      setMessage("Please fill all fields.");
-    } else {
-      setMessage("Form submitted successfully!");
-    }
-  }
-
   return (
-    <div className={darkMode ? "dark" : ""}>
+    <>
       <Header />
       <Nav />
 
-      <main>
-        <img
-          src="https://tse2.mm.bing.net/th/id/OIP.ac8SS3sITKocmuoR_TWCNwAAAA?pid=Api&h=220&P=0"
-          alt="Duck"
-          className="hero-image"
-        />
+      <main className="container">
+        <section className="hero">
+          <div>
+            <p className="eyebrow">IT516 Web Information Systems</p>
+            <h1>React Component-Based Portfolio</h1>
+            <p>
+              This project refactors my earlier HTML, CSS, and vanilla
+              JavaScript website into a cleaner React and Next.js architecture.
+            </p>
+            <ThemeToggle />
+          </div>
 
-        <section className="card-section">
-          <h2>About Me</h2>
+          <img
+            src="https://tse2.mm.bing.net/th/id/OIP.ac8SS3sITKocmuoR_TWCNwAAAA?pid=Api&h=220&P=0"
+            alt="Sample project visual"
+            className="heroImage"
+          />
+        </section>
 
+        <section className="section">
+          <h2>About the Project</h2>
           <p>
-            Hello, my name is Ezer. This is my first React web project.
+            The goal of this website is to demonstrate semantic structure,
+            responsive design, JavaScript interactivity, and React component
+            architecture in one deployed project.
           </p>
-
-          <button onClick={() => setDarkMode(!darkMode)}>
-            Toggle Dark Mode
-          </button>
         </section>
 
-        <section className="card-section">
+        <section className="section">
           <h2>Contact Form</h2>
-
-          <form onSubmit={handleSubmit}>
-            <input
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              type="text"
-              placeholder="Your Name"
-              aria-label="Name"
-            />
-
-            <input
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              type="email"
-              placeholder="Your Email"
-              aria-label="Email"
-            />
-
-            <button type="submit">Submit</button>
-          </form>
-
-          <p
-            className={
-              message.includes("successfully")
-                ? "success-message"
-                : "error-message"
-            }
-          >
-            {message}
-          </p>
+          <ContactForm />
         </section>
 
-        <section className="card-section">
-          <h2>My Skills</h2>
-
-          <ul>
-            <Card title="HTML" />
-            <Card title="CSS" />
-            <Card title="JavaScript" />
-            <Card title="React" />
-            <Card title="GitHub" />
-          </ul>
+        <section className="section">
+          <h2>Skills Demonstrated</h2>
+          <div className="grid">
+            {skills.map((skill) => (
+              <SkillCard
+                key={skill.title}
+                title={skill.title}
+                description={skill.description}
+              />
+            ))}
+          </div>
         </section>
       </main>
 
       <Footer />
-    </div>
+    </>
   );
 }
