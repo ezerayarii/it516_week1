@@ -20,7 +20,7 @@ async function loadData() {
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const res = await fetch("https://api.github.com/users/THIS_USER_DOES_NOT_EXIST_123456")
+    const res = await fetch("https://api.github.com/users/octocat");
 
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
