@@ -20,7 +20,7 @@ async function loadData() {
 
     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-    const res = await fetch("https://api.github.com/users/octocat");
+    const res = await fetch("https://api.github.com/users/THIS_USER_DOES_NOT_EXIST_123456")
 
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
@@ -50,19 +50,16 @@ async function loadData() {
     }
   }
 
-  if (loading) {
-    return (
-      <main className="min-h-screen p-10">
-        <h1 className="text-3xl font-bold mb-6">Week 7: Async JavaScript</h1>
-
-        <div className="space-y-3 max-w-md">
-          <div className="h-6 w-48 bg-gray-200 rounded animate-pulse"></div>
-          <div className="h-4 w-full bg-gray-200 rounded animate-pulse"></div>
-          <div className="h-4 w-3/4 bg-gray-200 rounded animate-pulse"></div>
-        </div>
-      </main>
-    );
-  }
+ if (loading) {
+  return (
+    <div>
+      <h1>Loading State Screenshot</h1>
+      <div className="h-10 w-64 bg-gray-200 rounded animate-pulse"></div>
+      <div className="h-10 w-64 bg-gray-200 rounded animate-pulse mt-4"></div>
+      <div className="h-10 w-64 bg-gray-200 rounded animate-pulse mt-4"></div>
+    </div>
+  );
+}
 
   if (error) {
     return (
