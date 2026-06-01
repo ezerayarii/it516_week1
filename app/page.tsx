@@ -14,11 +14,13 @@ export default function DataPanel() {
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
-  async function loadData() {
-    try {
-      setError(null);
+async function loadData() {
+  try {
+    setError(null);
 
-      const res = await fetch("https://api.github.com/users/octocat");
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const res = await fetch("https://api.github.com/users/octocat");
 
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
