@@ -1,5 +1,5 @@
 import Link from "next/link";
-import type { Message } from "@/app/generated/prisma/client";
+import type { Message } from "@prisma/client";
 import { getPrisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";

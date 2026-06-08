@@ -1,0 +1,10 @@
+
+> it516_week4@0.1.0 dev
+> next dev --port 5560
+
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:5560
+- Network:       http://192.168.4.203:5560
+- Environments: .env
+✓ Ready in 711ms
+[?25h
