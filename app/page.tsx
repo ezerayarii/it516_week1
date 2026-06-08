@@ -1,115 +1,33 @@
-"use client";
+import Link from "next/link";
+import { createMessage } from "./actions";
 
-import { useState, useEffect } from "react";
-
-type GitHubUser = {
-  login: string;
-  avatar_url: string;
-  followers: number;
-};
-
-export default function DataPanel() {
-  const [data, setData] = useState<GitHubUser | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
-
-async function loadData() {
-  try {
-    setError(null);
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
-    const res = await fetch("https://api.github.com/users/octocat");
-
-      if (!res.ok) {
-        throw new Error(`HTTP ${res.status}`);
-      }
-
-      const json: GitHubUser = await res.json();
-      setData(json);
-    } catch (err) {
-      const message = err instanceof Error ? err.message : "Unknown error";
-      setError(message);
-    } finally {
-      setLoading(false);
-    }
-  }
-
-  useEffect(() => {
-    loadData();
-  }, []);
-
-  async function refresh() {
-    setRefreshing(true);
-
-    try {
-      await loadData();
-    } finally {
-      setRefreshing(false);
-    }
-  }
-
- if (loading) {
+export default function ContactPage() {
   return (
-    <div>
-      <h1>Loading State Screenshot</h1>
-      <div className="h-10 w-64 bg-gray-200 rounded animate-pulse"></div>
-      <div className="h-10 w-64 bg-gray-200 rounded animate-pulse mt-4"></div>
-      <div className="h-10 w-64 bg-gray-200 rounded animate-pulse mt-4"></div>
-    </div>
-  );
-}
+    <main>
+      <section className="page-section">
+        <h1>Week 8: Contact Form</h1>
+        <p>
+          This form saves messages to a PostgreSQL database using a Next.js
+          Server Action and Prisma.
+        </p>
 
-  if (error) {
-    return (
-      <main className="min-h-screen p-10">
-        <h1 className="text-3xl font-bold mb-6">Week 7: Async JavaScript</h1>
+        <form action={createMessage} className="contact-form">
+          <label htmlFor="name">Name</label>
+          <input id="name" name="name" type="text" required />
 
-        <div className="border rounded p-6 max-w-md">
-          <p role="alert" className="text-red-600 mb-4">
-            Error: {error}
-          </p>
+          <label htmlFor="email">Email</label>
+          <input id="email" name="email" type="email" required />
 
-          <button
-            onClick={refresh}
-            disabled={refreshing}
-            aria-busy={refreshing}
-            className="border px-4 py-2 rounded"
-          >
-            {refreshing ? "Trying again..." : "Try Again"}
-          </button>
-        </div>
-      </main>
-    );
-  }
+          <label htmlFor="body">Message</label>
+          <textarea id="body" name="body" rows={5} required />
 
-  return (
-    <main className="min-h-screen p-10">
-      <h1 className="text-3xl font-bold mb-6">Week 7: Async JavaScript</h1>
+          <button type="submit">Submit Message</button>
+        </form>
 
-      <div className="border rounded p-6 max-w-md space-y-4">
-        <h2 className="text-2xl font-semibold">{data?.login}</h2>
-
-        <img
-          src={data?.avatar_url}
-          width="120"
-          height="120"
-          alt={data?.login}
-          className="rounded-full"
-        />
-
-        <p>Followers: {data?.followers}</p>
-
-        <button
-          onClick={refresh}
-          disabled={refreshing}
-          aria-busy={refreshing}
-          className="border px-4 py-2 rounded"
-        >
-          {refreshing ? "Refreshing..." : "Refresh"}
-        </button>
-      </div>
+        <p>
+          <Link href="/messages">View submitted messages</Link>
+        </p>
+      </section>
     </main>
   );
 }
