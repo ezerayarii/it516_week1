@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { createMessage } from "./actions";
+import { ContactForm } from "@/components/contact-form";
 
 export default function ContactPage() {
   return (
@@ -11,18 +11,7 @@ export default function ContactPage() {
           Server Action and Prisma.
         </p>
 
-        <form action={createMessage} className="contact-form">
-          <label htmlFor="name">Name</label>
-          <input id="name" name="name" type="text" required />
-
-          <label htmlFor="email">Email</label>
-          <input id="email" name="email" type="email" required />
-
-          <label htmlFor="body">Message</label>
-          <textarea id="body" name="body" rows={5} required />
-
-          <button type="submit">Submit Message</button>
-        </form>
+        <ContactForm />
 
         <p>
           <Link href="/messages">View submitted messages</Link>

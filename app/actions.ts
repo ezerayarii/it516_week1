@@ -1,26 +1,49 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
-import { prisma } from "@/lib/prisma";
+import { getPrisma } from "@/lib/prisma";
 
-export async function createMessage(formData: FormData) {
+export type MessageFormState = {
+  error?: string;
+  success?: string;
+};
+
+export async function createMessage(
+  _previousState: MessageFormState,
+  formData: FormData,
+): Promise<MessageFormState> {
   const name = String(formData.get("name") ?? "").trim();
   const email = String(formData.get("email") ?? "").trim();
   const body = String(formData.get("body") ?? "").trim();
 
   if (!name || !email || !body) {
-    throw new Error("Name, email, and message are required.");
+    return {
+      error: "Name, email, and message are required.",
+    };
   }
 
-  await prisma.message.create({
-    data: {
-      name,
-      email,
-      body,
-    },
-  });
+  try {
+    const prisma = getPrisma();
+
+    await prisma.message.create({
+      data: {
+        name,
+        email,
+        body,
+      },
+    });
+  } catch (error) {
+    console.error("Unable to save message:", error);
+
+    return {
+      error:
+        "The message could not be saved. Check DATABASE_URL and run prisma db push.",
+    };
+  }
 
   revalidatePath("/messages");
-  redirect("/messages");
+
+  return {
+    success: "Message saved successfully.",
+  };
 }

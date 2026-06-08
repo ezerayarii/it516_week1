@@ -1,15 +1,27 @@
 import Link from "next/link";
-import { prisma } from "@/lib/prisma";
+import type { Message } from "@/app/generated/prisma/client";
+import { getPrisma } from "@/lib/prisma";
 
 export const dynamic = "force-dynamic";
 
 export default async function MessagesPage() {
-  const messages = await prisma.message.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    take: 20,
-  });
+  let messages: Message[] = [];
+  let databaseError = "";
+
+  try {
+    const prisma = getPrisma();
+
+    messages = await prisma.message.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 20,
+    });
+  } catch (error) {
+    console.error("Unable to load messages:", error);
+    databaseError =
+      "Messages could not be loaded. Check DATABASE_URL and run prisma db push.";
+  }
 
   return (
     <main>
@@ -17,7 +29,11 @@ export default async function MessagesPage() {
         <h1>Latest Messages</h1>
         <p>The newest 20 contact form messages are shown below.</p>
 
-        {messages.length === 0 ? (
+        {databaseError ? (
+          <p className="form-error" role="alert">
+            {databaseError}
+          </p>
+        ) : messages.length === 0 ? (
           <p>No messages have been submitted yet.</p>
         ) : (
           <div className="message-list">
