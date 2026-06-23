@@ -32,6 +32,9 @@ export default function HomePage() {
         <p>
           <Link href="/contact">Open the contact page</Link>
         </p>
+        <p>
+          <Link href="/documentation">View project documentation</Link>
+        </p>
       </section>
     </main>
   );

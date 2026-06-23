@@ -12,6 +12,7 @@ export default function SiteHeader() {
           <Link href="/">Home</Link>
           <Link href="/contact">Contact</Link>
           <Link href="/messages">Messages</Link>
+          <Link href="/documentation">Docs</Link>
         </nav>
         <ThemeToggle />
       </div>
