@@ -1,5 +1,27 @@
 # Design Notes
 
+## Week 3: Interactive Features
+
+### Feature 1: Theme Toggle
+
+What it does: The theme toggle switches the site between light mode and dark mode from the shared header.
+
+Why it matters: It lets visitors choose the color contrast that is more comfortable for them and keeps that choice across pages.
+
+Events involved: The main event is `click` on the theme button.
+
+State to track: The active theme is stored as either `light` or `dark` in `localStorage`, with `prefers-color-scheme` used as the first default.
+
+### Feature 2: Contact Form Validation
+
+What it does: The contact form checks that name, email, and message are filled in before showing a success state.
+
+Why it matters: It gives the user immediate feedback and prevents incomplete messages from being accepted.
+
+Events involved: The form uses `submit` to validate and `input` to clear old messages when the user starts correcting the form.
+
+State to track: The component tracks the current values of the form fields and the current validation message shown in the live status area.
+
 ## Week 8: Database & Backend
 
 This project uses PostgreSQL as the database because it is a reliable relational database and works well with Vercel-hosted web applications. PostgreSQL stores the contact form submissions so the data stays available after the page refreshes or the user leaves the site.

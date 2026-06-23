@@ -1,20 +1,36 @@
 import Link from "next/link";
-import { ContactForm } from "@/components/contact-form";
 
-export default function ContactPage() {
+export default function HomePage() {
   return (
     <main>
       <section className="page-section">
-        <h1>Week 8: Contact Form</h1>
+        <h1>Week 3: Interactive Features</h1>
         <p>
-          This form saves messages to a PostgreSQL database using a Next.js
-          Server Action and Prisma.
+          This page demonstrates two vanilla JavaScript interactions in a
+          Next.js App Router project.
         </p>
 
-        <ContactForm />
+        <div className="feature-grid">
+          <article className="feature-card">
+            <h2>Theme Toggle</h2>
+            <p>
+              Use the button in the header to switch between light and dark
+              mode. The choice is saved in localStorage and follows you between
+              pages.
+            </p>
+          </article>
+
+          <article className="feature-card">
+            <h2>Form Validation</h2>
+            <p>
+              The contact page validates required fields and email format with
+              DOM events before showing a success message.
+            </p>
+          </article>
+        </div>
 
         <p>
-          <Link href="/messages">View submitted messages</Link>
+          <Link href="/contact">Open the contact page</Link>
         </p>
       </section>
     </main>

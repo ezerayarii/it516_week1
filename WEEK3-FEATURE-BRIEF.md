@@ -1,0 +1,7 @@
+# Week 3 Feature Brief
+
+For Week 3, I added two vanilla JavaScript features to my Next.js site: a theme toggle and contact form validation. The theme toggle is available in the shared header on both the home page and the contact page. It listens for the `click` event on the theme button, changes the theme by updating `document.documentElement.dataset.theme`, and saves the selected value in `localStorage`. I chose this feature because it improves user comfort and demonstrates how browser storage can keep state across page navigation.
+
+The second feature is a contact form on the `/contact` page. It listens for the form `submit` event, calls `preventDefault()`, reads the fields with `FormData`, and validates that name, email, and message are complete. It also listens for the `input` event so old validation messages clear when the user starts correcting the form. I chose this because form validation is one of the most common real-world uses of JavaScript events.
+
+One gotcha I hit was that Next.js client-side navigation can replace page elements without doing a full reload. My first version attached behavior too directly to the first rendered elements, so I updated the features to use document-level event delegation. That made the interactions keep working across pages. This would be easier with React hooks because `useEffect` could attach and clean up event listeners when components mount or unmount.
