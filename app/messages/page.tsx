@@ -25,38 +25,53 @@ export default async function MessagesPage() {
 
   return (
     <main>
-      <section className="page-section">
-        <h1>Latest Messages</h1>
-        <p>The newest 20 contact form messages are shown below.</p>
+      <section className="page-section messages-hero">
+        <p className="eyebrow">Database Records</p>
+        <h1>Contact Form Submissions</h1>
+        <p>
+          This page shows the latest messages saved from the contact form using
+          a Next.js server action, Prisma, and PostgreSQL.
+        </p>
 
         {databaseError ? (
           <p className="form-error" role="alert">
             {databaseError}
           </p>
         ) : messages.length === 0 ? (
-          <p>No messages have been submitted yet.</p>
+          <div className="empty-state">
+            <h2>No messages yet</h2>
+            <p>
+              Submit the contact form to create the first database record.
+            </p>
+            <Link href="/contact">Go to contact form</Link>
+          </div>
         ) : (
           <div className="message-list">
             {messages.map((message) => (
               <article className="message-card" key={message.id}>
-                <h2>{message.name}</h2>
-                <p className="message-meta">
-                  {message.email} |{" "}
-                  {message.createdAt.toLocaleDateString("en-US", {
-                    month: "short",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </p>
+                <div className="message-card-header">
+                  <div>
+                    <h2>{message.name}</h2>
+                    <p className="message-meta">{message.email}</p>
+                  </div>
+                  <time dateTime={message.createdAt.toISOString()}>
+                    {message.createdAt.toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </time>
+                </div>
                 <p>{message.body}</p>
               </article>
             ))}
           </div>
         )}
 
-        <p>
-          <Link href="/">Back to contact form</Link>
-        </p>
+        <div className="message-actions">
+          <Link href="/contact">Submit another message</Link>
+          <Link href="/documentation">View documentation</Link>
+        </div>
       </section>
     </main>
   );

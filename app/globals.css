@@ -298,10 +298,40 @@ img {
   margin: 24px 0;
 }
 
+.messages-hero {
+  animation: fade-slide-up 420ms ease both;
+  max-width: 960px;
+}
+
 .message-card {
+  animation: fade-slide-up 420ms ease both;
+  background:
+    linear-gradient(135deg, rgba(15, 94, 168, 0.06), rgba(255, 255, 255, 0)),
+    #ffffff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 16px;
+  padding: 18px;
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.message-card:hover {
+  border-color: #0f5ea8;
+  transform: translateY(-2px);
+}
+
+.message-card-header {
+  align-items: flex-start;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+
+.message-card time {
+  color: #555;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 .message-card h2 {
@@ -311,6 +341,40 @@ img {
 .message-meta {
   color: #555;
   font-size: 0.95rem;
+}
+
+.message-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.message-actions a,
+.empty-state a {
+  background: #1f2937;
+  border-radius: 6px;
+  color: white;
+  padding: 11px 14px;
+  text-decoration: none;
+}
+
+.empty-state {
+  border: 1px dashed #9ca3af;
+  border-radius: 8px;
+  margin: 24px 0;
+  padding: 20px;
+}
+
+:root[data-theme="dark"] .message-card {
+  background:
+    linear-gradient(135deg, rgba(147, 197, 253, 0.1), rgba(31, 41, 55, 0)),
+    #1f2937;
+}
+
+:root[data-theme="dark"] .message-card time,
+:root[data-theme="dark"] .message-meta {
+  color: #cbd5e1;
 }
 
 a {
