@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { createMessage, type MessageFormState } from "@/app/actions";
 
@@ -28,7 +29,11 @@ export function ContactForm() {
         </p>
       ) : null}
 
-      {state.success ? <p className="form-success">{state.success}</p> : null}
+      {state.success ? (
+        <p className="form-success">
+          {state.success} <Link href="/messages">View it on the messages page.</Link>
+        </p>
+      ) : null}
 
       <button disabled={isPending} type="submit">
         {isPending ? "Saving..." : "Submit Message"}

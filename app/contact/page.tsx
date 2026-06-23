@@ -1,4 +1,5 @@
-import Week3ContactForm from "@/components/week3-contact-form";
+import Link from "next/link";
+import { ContactForm } from "@/components/contact-form";
 
 export default function ContactPage() {
   return (
@@ -6,12 +7,15 @@ export default function ContactPage() {
       <section className="page-section">
         <h1>Contact</h1>
         <p>
-          This secondary page uses a vanilla JavaScript form validation feature.
-          The form checks required fields and email format before showing a
-          success message.
+          Submit a message below. The form saves your name, email, and message
+          to the PostgreSQL database using Prisma.
         </p>
 
-        <Week3ContactForm />
+        <ContactForm />
+
+        <p>
+          <Link href="/messages">View saved messages</Link>
+        </p>
       </section>
     </main>
   );
